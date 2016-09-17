@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:id="@+id/parentPanel"
+    android:padding="@dimen/margin_10">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/frame_layout"
+        android:visibility="invisible"
+
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleView"
+            android:layout_width="@dimen/margin_48"
+            android:layout_height="@dimen/margin_48"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/avatar"
+            />
+        <TextView
+            android:id="@+id/textView_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/tv_title"
+            android:layout_toRightOf="@+id/tv_title"
+            android:text=""
+            android:visibility="visible" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/txt_date_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text=""/>
+
+
+    <TextView
+        android:id="@+id/txt_name_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10"
+        android:paddingTop="@dimen/two_dp"
+        android:text="Wifi"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_14"/>
+
+    <TextView
+        android:id="@+id/txt_message_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_name_chat"
+        android:layout_alignStart="@+id/txt_name_chat"
+        android:layout_below="@+id/txt_name_chat"
+        android:paddingLeft="@dimen/margin_10"
+        android:paddingRight="@dimen/margin_10"
+        android:paddingTop="@dimen/two_dp"
+        android:singleLine="true"
+        android:text="Status"
+        android:textColor="@color/hint_color"
+        android:textSize="@dimen/text_10"/>
+
+
+</RelativeLayout>

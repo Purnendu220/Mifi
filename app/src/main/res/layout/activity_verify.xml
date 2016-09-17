@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="mifi.pm.com.exampleproject.Verify">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/error_red"
+        >
+
+        <ImageView
+            android:id="@+id/title_bar_left_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:padding="5dp"
+            android:src="@mipmap/ic_launcher" />
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="7dp"
+            android:text="VERIFY"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right|center_vertical"
+            android:padding="5dp"
+            android:layout_marginRight="@dimen/margin_50"
+            android:visibility="gone"
+            />
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="right|center_vertical"
+            android:padding="5dp"
+            />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextotp"
+            android:layout_margin="@dimen/margin_10"
+            android:hint="Enter OTP"
+            android:background="@drawable/bg_edit"
+            android:padding="@dimen/margin_15"
+            android:layout_gravity="center_horizontal" />
+        <Button
+            android:id="@+id/button_reg_now"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_48"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_20"
+            android:background="@drawable/rounded_button"
+            android:gravity="center"
+            android:inputType="text"
+            android:textStyle="bold"
+            android:padding="@dimen/margin_10"
+            android:text="Verify"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_18" />
+    </LinearLayout>
+</RelativeLayout>

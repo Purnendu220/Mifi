@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+
+    <LinearLayout
+        android:id="@+id/layout_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/error_red"
+            >
+
+            <ImageView
+                android:id="@+id/title_bar_left_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:padding="5dp"
+                android:src="@mipmap/ic_launcher" />
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="7dp"
+                android:text="Offers"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/cart"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right|center_vertical"
+                android:padding="5dp"
+                android:layout_marginRight="@dimen/margin_50"
+                android:visibility="gone"
+                 />
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right|center_vertical"
+                android:padding="5dp"
+                />
+
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/separater_gry_light1" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearlayout_top_part"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/layout_top"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:background="@color/separater_gry_light1"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+
+                <Button
+                    android:id="@+id/login_btnActiveBid"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_48"
+                    android:background="@color/white"
+                    android:text="ALL"
+
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/margin_17" />
+
+
+
+
+            <View
+                android:id="@+id/view_ActiveBid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_below="@+id/slyce_messaging_view_group_entry_field"
+                android:background="@color/error_red"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/two_dp"
+            >
+
+            <Button
+                android:id="@+id/login_btnSoldBid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:background="@color/white"
+                android:text="CATEGORY"
+                android:textColor="@color/login_signup_create_account_activity"
+                android:textSize="@dimen/margin_17" />
+
+            <View
+                android:id="@+id/view_SoldBid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_below="@+id/slyce_messaging_view_group_entry_field"
+                android:background="@color/error_red"
+                android:visibility="invisible"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/two_dp"
+            >
+
+            <Button
+                android:id="@+id/login_btnBoughtBid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_48"
+                android:background="@color/white"
+                android:text="NEARBY"
+                android:textColor="@color/login_signup_create_account_activity"
+
+
+                android:textSize="@dimen/margin_17" />
+
+            <View
+                android:id="@+id/view_BoughtBid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_height"
+                android:layout_below="@+id/slyce_messaging_view_group_entry_field"
+                android:background="@color/error_red"
+                android:visibility="invisible"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Home"
+        android:textSize="40dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@+id/textView4"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No items to view come back later."
+        android:visibility="gone"
+        android:id="@+id/textView5"
+        android:textColor="@color/black"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearlayout_top_part"
+        android:id="@+id/frame_layout"
+        android:background="@drawable/img"
+
+        android:layout_centerHorizontal="true"></FrameLayout>
+</RelativeLayout>
