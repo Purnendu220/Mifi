@@ -79,7 +79,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 		if(ex.getAdvertisement().getType().equalsIgnoreCase("text")){
 		AppSharedPreferences.getInstance(ctx).setPrefrence(AppMessages.Constants.ADVT,message);
 			Intent i = new Intent().setClass(ctx, TextScrollHome.class);
-			i.addCategory(Intent.CATEGORY_LAUNCHER);
 			i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			ctx.startActivity(i);
@@ -88,7 +87,6 @@ public class GCMIntentService extends GCMBaseIntentService {
 			Picasso.with(ctx).load(ex.getAdvertisement().getAdUrl()).fetch();
 			AppSharedPreferences.getInstance(ctx).setPrefrence(AppMessages.Constants.ADVT1,message);
 			Intent i = new Intent().setClass(ctx, AdvtActivity.class);
-			i.addCategory(Intent.CATEGORY_LAUNCHER);
 			i.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
 			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			ctx.startActivity(i);

@@ -191,7 +191,7 @@ sb.append(response.body().toString());
                 .add("mobile", mobile)
                 .build();*/
         Request request = new Request.Builder()
-                .url(" http://52.66.157.34/mifi_connect/api/register")
+                .url("http://52.66.105.179/mifi_connect/api/register")
                 .post(body)
                 .build();
 
@@ -205,6 +205,38 @@ sb.append(response.body().toString());
             e.printStackTrace();
         }
         return sb.toString();
+    }
+    public static String SendRequestHistoryCapture(String history){
+        final MediaType JSON
+                = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON, history);
+        StringBuilder sb=new StringBuilder();
+        OkHttpClient client = new OkHttpClient();
+
+       /* RequestBody formBody =  new FormEncodingBuilder()
+                .add("fname", gcmid)
+                .add("lname", deviceid)
+                .add("email", macAddress)
+                .add("address", DeviceModel)
+                .add("history", history)
+                .add("mobile", mobile)
+                .build();*/
+        Request request = new Request.Builder()
+                .url("http://52.66.105.179/mifi_connect/api/insertBrowseringDetails")
+                .post(body)
+                .build();
+
+        try {
+            Response response = client.newCall(request).execute();
+            String str = new String(response.body().bytes(), "UTF-8");
+            sb.append(str);
+            // Do something with the response.
+            Log.e("TAG","Response"+sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+
     }
     public static String LogOutRequest(){
         StringBuilder sb = new StringBuilder();

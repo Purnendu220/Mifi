@@ -15,7 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -34,6 +34,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import mifi.pm.com.exampleproject.handler.AppSharedPreferences;
 import mifi.pm.com.exampleproject.handler.HttpRequest;
 import mifi.pm.com.exampleproject.handler.SimpleDividerItemDecoration;
 import mifi.pm.com.exampleproject.interfaces.VerticalChatAdapter;
@@ -56,13 +57,17 @@ public class AlarmReceiver extends BroadcastReceiver {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 			String formateddate = sdf.format(c.getTime());
 			refrenceWrapper =RefrenceWrapper.getRefrenceWrapper(context);
-                      new AsyncTaskUpdate().execute();
+                      new AsyncTaskUpdate(context).execute();
 
 		}
 
 	}
 
 	public class AsyncTaskUpdate extends AsyncTask<String, String, String> {
+		Context mContext;
+		public AsyncTaskUpdate(Context mContext) {
+			this.mContext=mContext;
+		}
 
 		@Override
 		protected void onPreExecute() {
@@ -81,46 +86,66 @@ public class AlarmReceiver extends BroadcastReceiver {
 		@Override
 		protected void onPostExecute(String strFromDoInBg) {
 			Log.e("TAG","Resp Status"+strFromDoInBg);
-			String str1=strFromDoInBg.replace("<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">","");
-			String str2=strFromDoInBg.replace("<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">","");
-			String str3=strFromDoInBg.replace("<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">00:02:57</attr><attr id=\"sessionUsage\">","");
-			String sessionStart=str1.replace("</attr><attr id=\"sessionDuration\">00:02:57</attr><attr id=\"sessionUsage\">12 KB</attr></response>","");
-			String sessionDuration=str2.replace("</attr><attr id=\"sessionUsage\">12 KB</attr></response>","");
-			String sessionUsage=str3.replace("</attr></response>","");
+			try{
+			String str1="<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">";
+			String str2="<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">";
+			String str3="<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">00:02:57</attr><attr id=\"sessionUsage\">";
+			String sessionStart=strFromDoInBg.substring(str1.length(),str1.length()+19);
+			String sessionDuration=strFromDoInBg.substring(str2.length(),str2.length()+8);
+			String sessionUsage=strFromDoInBg.substring(str3.length(),str3.length()+5);
 
 			Log.e("STR","sessionStart:-"+sessionStart);
 			Log.e("STR","sessionDuration:-"+sessionDuration);
 			Log.e("STR","sessionUsage:-"+sessionUsage);
-			refrenceWrapper.gestatusliste().OnStatusConnected(sessionStart,sessionDuration,sessionUsage);
+			Log.e("STR","Time"+sessionDuration.substring(3,5));
+
+				if(Integer.parseInt(sessionDuration.substring(3,5))>10){
+					HttpRequest.LogOutRequest();
+					AppSharedPreferences.getInstance(mContext).setPrefrence(false);
+					generateNotification(mContext,"Your session for today has Expired");
+				}
+				else{
+					Intent i=new Intent(mContext,TextScrollHome.class);
+					mContext.startActivity(i);
+					generateNotification(mContext,"Your session Duration is"+sessionDuration+" and session usage is "+sessionUsage);
+
+				}
+				refrenceWrapper.gestatusliste().OnStatusConnected(sessionStart,sessionDuration,sessionUsage);
+
+			}
+			catch (Exception e){
+				e.printStackTrace();}
 			//re
 		}
 	}
 
 
-/*	@SuppressWarnings("deprecation")
-	private void generateNotification(Context context, String message) {
-		System.out.println(message + "++++++++++2");
-		int icon = R.drawable.icon1;
-		long when = System.currentTimeMillis();
-		NotificationManager notificationManager = (NotificationManager) context
-				.getSystemService(Context.NOTIFICATION_SERVICE);
-		Notification notification = new Notification(icon, message, when);
-		String title = context.getString(R.string.app_name);
-		String subTitle = message;
-		Intent notificationIntent = new Intent(context, Expired.class);
-		notificationIntent.putExtra("content", message);
-		PendingIntent intent = PendingIntent.getActivity(context, 0,
-				notificationIntent, 0);
-		notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		notification.setLatestEventInfo(context, title, subTitle, intent);
-		// To play the default sound with your notification:
-		notification.defaults |= Notification.DEFAULT_SOUND;
-		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		notification.defaults |= Notification.DEFAULT_VIBRATE;
-		notificationManager.notify(0, notification);
+	@SuppressLint("NewApi")
+	public void generateNotification(Context context, String message){
+		System.out.println(message+"++++++++++2");
 
-	}*/
+		NotificationManager manager;
+		Notification myNotication;
+		manager = (NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
 
+		Intent intent = new Intent(context, FirstActivity.class);
+
+		PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, intent, 0);
+
+		Notification.Builder builder = new Notification.Builder(context);
+
+		builder.setAutoCancel(true);
+		builder.setTicker("");
+		builder.setContentTitle(context.getString(R.string.app_name));
+		builder.setContentText(message);
+		builder.setSmallIcon(R.mipmap.ic_launcher);
+		builder.setContentIntent(pendingIntent);
+		builder.setOngoing(true);
+		builder.setNumber(100);
+		builder.build();
+
+		myNotication = builder.getNotification();
+		manager.notify(11, myNotication);
+	}
 
 }

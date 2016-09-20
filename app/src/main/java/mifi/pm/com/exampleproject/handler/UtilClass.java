@@ -118,7 +118,7 @@ public class UtilClass {
 
 
     public String CreateRegisterRequest(String user,String pass,String gcm,String mobile,String wifissid,String email,String cord,String imsi,String deviceid,String versio
-    ,String devicemodel,String signal){
+    ,String devicemodel,String signal,String imei,String oparator){
 
 
         JSONObject objectmain=new JSONObject();
@@ -136,11 +136,11 @@ public class UtilClass {
             object.put("wifi_ssid", wifissid);
             object.put("location_coods", cord);
 
-            object1.put("imei", user);
-            object1.put("imsi", pass);
+            object1.put("imei", imei);
+            object1.put("imsi", deviceid);
             object1.put("msisdn", mobile);
-            object1.put("operator", email);
-            object1.put("network", "male");
+            object1.put("operator", oparator);
+            object1.put("network", "WIFI");
             object1.put("signal_strength", signal);
             object1.put("isRoaming", "true");
             object1.put("device_make",devicemodel);

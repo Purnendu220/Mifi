@@ -86,12 +86,12 @@ public class LoginActivity extends AppCompatActivity {
                 AppSharedPreferences.getInstance(mContext).setPrefrence(AppMessages.Constants.PASS,username);
                 AppSharedPreferences.getInstance(mContext).setPrefrence(true);
                 try {
-                    String str1=strFromDoInBg.replace("<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">","");
-                    String str2=strFromDoInBg.replace("<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">","");
-                    String str3=strFromDoInBg.replace("<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">00:02:57</attr><attr id=\"sessionUsage\">","");
-                    String sessionStart=str1.replace("</attr><attr id=\"sessionDuration\">00:02:57</attr><attr id=\"sessionUsage\">12 KB</attr></response>","");
-                    String sessionDuration=str2.replace("</attr><attr id=\"sessionUsage\">12 KB</attr></response>","");
-                    String sessionUsage=str3.replace("</attr></response>","");
+                    String str1="<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">";
+                    String str2="<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">";
+                    String str3="<?xml version=\"1.0\"?><response type=\"status\"><attr id=\"sessionStart\">09/08/2016 15:50:20</attr><attr id=\"sessionDuration\">00:02:57</attr><attr id=\"sessionUsage\">";
+                    String sessionStart=strFromDoInBg.substring(str1.length(),str1.length()+19);
+                    String sessionDuration=strFromDoInBg.substring(str2.length(),str2.length()+8);
+                    String sessionUsage=strFromDoInBg.substring(str3.length(),str3.length()+5);
                     AppSharedPreferences.getInstance(mContext).setPrefrence(AppMessages.Constants.sessionStart,sessionStart);
                     AppSharedPreferences.getInstance(mContext).setPrefrence(AppMessages.Constants.sessionDuration,sessionDuration);
                     AppSharedPreferences.getInstance(mContext).setPrefrence(AppMessages.Constants.sessionUsage,sessionUsage);

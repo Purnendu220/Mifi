@@ -84,10 +84,10 @@ Context mContext;
         protected void onPostExecute(String strFromDoInBg) {
             Log.e("TAG","onPostExecute"+strFromDoInBg);
             if(AppSharedPreferences.getInstance(mContext).getPrefrence1()) {
-                /*Intent i = new Intent(mContext, LoginActivity.class);
+                Intent i = new Intent(mContext, LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                mContext.startActivity(i);*/
+                mContext.startActivity(i);
                 AppSharedPreferences.getInstance(mContext).setPrefrence1(false);
             }
 

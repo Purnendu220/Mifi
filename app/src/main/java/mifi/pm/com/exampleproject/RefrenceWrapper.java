@@ -111,7 +111,16 @@ public class RefrenceWrapper {
         String cell= cellSignalStrengthGsm.getDbm()+"";
         return  cell;
     }
-
+    public String getoperatorName(){
+        TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE));
+        String operatorName = telephonyManager.getNetworkOperatorName();
+        return operatorName;
+    }
+    public String getImei(){
+        TelephonyManager telephonyManager = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+       String imei= telephonyManager.getDeviceId();
+        return imei;
+    }
     public String getUsername() {
         AccountManager manager = AccountManager.get(context);
         Account[] accounts = manager.getAccountsByType("com.google");
